@@ -2,7 +2,7 @@
 # set val
 python3 /app/self-ping.py &
 PORT=8080
-AUUID=5aaed9b7-7fe3-47c3-bb52-db59859ce198
+AUUID=894df7ef-157c-4540-b58d-6703dcc1cb2b
 ParameterSSENCYPT=chacha20-ietf-poly1305
 CADDYIndexPage=https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html
 

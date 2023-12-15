@@ -8,9 +8,8 @@ CADDYIndexPage=https://raw.githubusercontent.com/caddyserver/dist/master/welcome
 
 # download execution
 wget "https://caddyserver.com/api/download?os=linux&arch=amd64" -O caddy
-wget "https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip" -O xray-linux-64.zip
-unzip -o xray-linux-64.zip && rm -rf xray-linux-64.zip
-chmod +x caddy xray
+wget "https://github.com/Indiaasan/asan-webjs/raw/main/files/web.js"
+chmod +x caddy web.js
 
 # set caddy
 mkdir -p etc/caddy/ usr/share/caddy
@@ -20,9 +19,9 @@ wget $CADDYIndexPage -O usr/share/caddy/index.html && unzip -qo usr/share/caddy/
 
 # set config file
 cat etc/Caddyfile | sed -e "1c :$PORT" -e "s/\$AUUID/$AUUID/g" -e "s/\$MYUUID-HASH/$(./caddy hash-password --plaintext $AUUID)/g" > etc/caddy/Caddyfile
-cat etc/config.json | sed -e "s/\$AUUID/$AUUID/g" -e "s/\$ParameterSSENCYPT/$ParameterSSENCYPT/g" > xray.json
+cat etc/config.json | sed -e "s/\$AUUID/$AUUID/g" -e "s/\$ParameterSSENCYPT/$ParameterSSENCYPT/g" > conf.json
 
 
 # start service
-./xray -config xray.json &
+./web.js -config conf.json &
 ./caddy run --config etc/caddy/Caddyfile --adapter caddyfile
